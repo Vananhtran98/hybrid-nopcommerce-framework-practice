@@ -1,0 +1,98 @@
+package com.nopcommerce.users;
+
+import commons.BasePage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+import java.util.Random;
+
+public class Level_02_BasePage_I_Initial {
+
+    private WebDriver driver;
+    BasePage basePage; // Declare
+
+    String emailAddress;
+
+
+    @BeforeClass
+    public void beforeClass() {
+
+        driver = new FirefoxDriver();
+        basePage = new BasePage(); // Initial
+
+        driver.get("http://demo.nopcommerce/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        emailAddress = "thomasmuller" + generateRandomNumber() + "@gmail.de";
+
+    }
+
+    @Test
+    public void TC_01_Register() {
+        basePage.waitForElementClickable(driver, "//a[@class='ico-register']");
+        basePage.clickToElement(driver, "//a[@class='ico-register']");
+
+        basePage.waitForElementClickable(driver, "//input[@id='gender-male']");
+        basePage.clickToElement(driver, "//input[@id='gender-male']");
+
+        basePage.sendKeyToElement(driver, "//input[@id = 'FirstName']", "Thomas");
+        basePage.sendKeyToElement(driver, "//input[@id = 'LastName']", "Muller");
+
+        basePage.sendKeyToElement(driver, "//input[@id = 'Email']", emailAddress);
+        basePage.sendKeyToElement(driver, "//input[@id = 'Company']", "Bayern Munich");
+        basePage.sendKeyToElement(driver, "//input[@id = 'Password']", "123456789");
+        basePage.sendKeyToElement(driver, "//input[@id = 'ConfirmPassword']", "123456789");
+
+        basePage.waitForElementClickable(driver, "//button[@id='register-button']");
+        basePage.clickToElement(driver, "//button[@id='register-button']");
+
+        Assert.assertEquals(basePage.getElementText(driver, "//div[@class='result']"), "Your registration completed");
+
+        basePage.waitForElementClickable(driver, "//a[@class='ico-logout']");
+        basePage.clickToElement(driver, "//a[@class='ico-logout']");
+    }
+
+    @Test
+    public void TC_02_Login() {
+
+        basePage.waitForElementClickable(driver, "//a[@class='ico-login']");
+        basePage.clickToElement(driver, "//a[@class='ico-login']");
+
+        basePage.sendKeyToElement(driver, "//input[@id = 'Email']", emailAddress);
+        basePage.sendKeyToElement(driver, "//input[@id = 'Password']", "123456789");
+
+        basePage.waitForElementClickable(driver, "//button[contains(@class,'login-button')]");
+        basePage.clickToElement(driver, "//button[contains(@class,'login-button')]");
+
+        Assert.assertTrue(basePage.isElementDisplayed(driver, "//a[@class='ico-account' and text() = 'My account']"));
+
+    }
+
+    @Test
+    public void TC_03_MyAccount() {
+
+        basePage.waitForElementClickable(driver, "//a[@class='ico-account']");
+        basePage.clickToElement(driver, "//a[@class='ico-account']");
+
+        Assert.assertTrue(basePage.isElementSelected(driver, "//input[@id='gender-male']"));
+
+        Assert.assertEquals(basePage.getElementAttribute(driver, "//input[@id='FirstName']", "value"), "Thomas");
+        Assert.assertEquals(basePage.getElementAttribute(driver, "//input[@id='LastName']", "value"), "Muller");
+
+        Assert.assertEquals(basePage.getElementAttribute(driver, "//input[@id='Company']", "value"), "Bayern Munich");
+    }
+
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
+
+    }
+
+    private int generateRandomNumber() {
+        return new Random().nextInt(99999);
+    }
+}
