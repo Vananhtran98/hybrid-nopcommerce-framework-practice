@@ -2,10 +2,13 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.CustomerInfoPageObject;
 import pageObjects.HomePageObject;
@@ -14,28 +17,22 @@ import pageObjects.RegisterPageObject;
 
 import java.time.Duration;
 
-public class Level_03_Page_Object extends BaseTest {
+public class Level_04_Multiple_Browser extends BaseTest {
 
     // Declare Variables
     private WebDriver driver;
     private HomePageObject homePage;
     private RegisterPageObject registerPage;
     private LoginPageObject loginPage;
-    private CustomerInfoPageObject customerInfoPage; // User-defined
+    private CustomerInfoPageObject customerInfoPage;
 
     private String firstName, lastName, emailAddress, companyName, password;
 
-
-    // Pre-Condition
+    @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        driver = new FirefoxDriver(); // Built-in
+    public void beforeClass(String browserName) {
+        driver = getBrowserDriver (browserName);
 
-        // Mở URL lên --> qua Home Page
-        driver.get("http://demo.nopcommerce/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-
-        // Page đó được sinh ra và bắt đầu làm những action của page đó
         homePage = new HomePageObject(driver);
 
         firstName = "John";
@@ -46,14 +43,11 @@ public class Level_03_Page_Object extends BaseTest {
 
     }
 
-    // Testcases
     @Test
     public void User_01_Register() {
         // Action 1
         homePage.clickToRegisterLink();
 
-        // Từ Home Page qua Register Page
-        // Page đó được sinh ra và bắt đầu làm những action của page đó
         registerPage = new RegisterPageObject(driver);
 
         registerPage.clickToMaleRadio();
@@ -96,12 +90,9 @@ public class Level_03_Page_Object extends BaseTest {
     public void User_03_MyAccount() {
         homePage.clickToMyAccountLink();
 
-        // Từ Home Page qua Customer Info Page
-        // Page đó được sinh ra và bắt đầu làm những action của page đó
         customerInfoPage = new CustomerInfoPageObject(driver);
 
         Assert.assertTrue(customerInfoPage.isGenderMaleSelected());
-
         Assert.assertEquals(customerInfoPage.getFirstNameTextboxValue(), firstName);
         Assert.assertEquals(customerInfoPage.getLastNameTextboxValue(), lastName);
         Assert.assertEquals(customerInfoPage.getEmailTextboxValue(), emailAddress);
@@ -109,7 +100,6 @@ public class Level_03_Page_Object extends BaseTest {
 
     }
 
-    // Post-Condition
     @AfterClass
     public void afterClass() {
         driver.quit();
