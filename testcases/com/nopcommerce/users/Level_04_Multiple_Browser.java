@@ -62,7 +62,6 @@ public class Level_04_Multiple_Browser extends BaseTest {
 
         Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
 
-
     }
 
     @Test
@@ -70,16 +69,12 @@ public class Level_04_Multiple_Browser extends BaseTest {
         registerPage.clickToLogoutLink();
         registerPage.clickToLoginLink();
 
-        // Từ Register Page qua Login Page
-        // Page đó được sinh ra và bắt đầu làm những action của page đó
         loginPage = new LoginPageObject(driver);
 
         loginPage.enterToEmailTextbox(emailAddress);
         loginPage.enterToPasswordTextbox(password);
         loginPage.clickToLoginButton();
 
-        // Từ Login Page qua Home Page
-        // Page đó được sinh ra và bắt đầu làm những action của page đó
         homePage = new HomePageObject(driver);
 
         Assert.assertTrue(homePage.isMyAccountLinkDisplayed());

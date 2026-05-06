@@ -1,0 +1,14 @@
+package factoryPattern;
+
+public abstract class CarFactory {
+    // Hàm abstract (có tên hàm/ chưa có phần thân)
+    // Những class mà kế thừa nó sẽ cần implement lại
+    // Khung để cho class khác follow theo đúng structure/ business
+
+    public abstract void viewCar();
+
+    public abstract void bookCar();
+
+    public abstract void driveCar();
+
+}
