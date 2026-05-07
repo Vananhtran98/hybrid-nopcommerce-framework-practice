@@ -333,5 +333,4 @@ public class BasePage {
     public void waitForElementClickable(WebDriver driver, String locator) {
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
     }
-
 }

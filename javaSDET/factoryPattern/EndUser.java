@@ -1,7 +1,5 @@
 package factoryPattern;
 
-import commons.CarList;
-
 public class EndUser {
     public static CarFactory carFactory;
     public static void main(String[] args) {
