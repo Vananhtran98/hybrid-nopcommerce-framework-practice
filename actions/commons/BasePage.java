@@ -13,8 +13,6 @@ import java.util.Set;
 
 public class BasePage {
 
-    // Tuân theo nguyên tắc của tính đóng gói (Encapsulation)
-    // Hàm static có thể truy cập trực tiếp từ phạm vi Class
     public static BasePage getBasePage() {
         return new BasePage();
     }
@@ -129,6 +127,7 @@ public class BasePage {
     }
 
     public void sendKeyToElement(WebDriver driver, String locator, String keysToSend) {
+        getElement(driver, locator).clear();
         getElement(driver, locator).sendKeys(keysToSend);
 
     }
