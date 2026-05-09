@@ -18,10 +18,13 @@ public class EndUser {
         switch (carList) {
             case HONDA:
                 carFactory = new HondaHead();
+                break;
             case HUYNDAI:
                 carFactory = new HuyndaiHead();
+                break;
             case FORD:
                 carFactory = new FordHead();
+                break;
             default:
                 new RuntimeException("Car name is not valid.");
         }

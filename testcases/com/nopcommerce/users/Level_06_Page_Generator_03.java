@@ -2,7 +2,6 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -30,7 +29,7 @@ public class Level_06_Page_Generator_03 extends BaseTest {
 
     @Test
     public void User_01_Register() {
-        registerPage = homePage.clickToRegisterLink();
+        registerPage = homePage.openRegisterLink();
 
         customerInfoPage = new CustomerInfoPageObject(driver); // page A -> C
 
@@ -51,7 +50,7 @@ public class Level_06_Page_Generator_03 extends BaseTest {
     @Test
     public void User_02_Login() {
         registerPage.clickToLogoutLink();
-        loginPage = registerPage.clickToLoginLink();
+        loginPage = registerPage.openLoginPage();
 
         homePage = loginPage.logInToSystem(emailAddress, password);
 
@@ -61,7 +60,7 @@ public class Level_06_Page_Generator_03 extends BaseTest {
 
     @Test
     public void User_03_MyAccount() {
-        customerInfoPage = homePage.clickToMyAccountLink();
+        customerInfoPage = homePage.openCustomerInfoPage();
 
         Assert.assertTrue(customerInfoPage.isGenderMaleSelected());
         Assert.assertEquals(customerInfoPage.getFirstNameTextboxValue(), firstName);

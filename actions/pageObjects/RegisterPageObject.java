@@ -2,7 +2,6 @@ package pageObjects;
 
 import commons.BasePage;
 import org.openqa.selenium.WebDriver;
-import pageUIs.LoginPageUI;
 import pageUIs.RegisterPageUI;
 
 public class RegisterPageObject extends BasePage {
@@ -62,7 +61,7 @@ public class RegisterPageObject extends BasePage {
         clickToElement(driver, RegisterPageUI.REGISTER_LOGOUT_LINK);
     }
 
-    public LoginPageObject clickToLoginLink() {
+    public LoginPageObject openLoginPage() {
         waitForElementClickable(driver, RegisterPageUI.REGISTER_LOGIN_LINK);
         clickToElement(driver, RegisterPageUI.REGISTER_LOGIN_LINK);
         return PageGenerator.getLoginPage(driver);

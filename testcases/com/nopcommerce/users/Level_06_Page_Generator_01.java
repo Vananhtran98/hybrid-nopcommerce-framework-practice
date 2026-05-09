@@ -33,7 +33,7 @@ public class Level_06_Page_Generator_01 extends BaseTest {
     @Test
     public void User_01_Register() {
         // Action 1
-        homePage.clickToRegisterLink();
+        homePage.openRegisterLink();
 
         // Thể hiện trực tiếp trên Test Class
         // Nguyên tc thiết kế phần mềm/ framework
@@ -59,7 +59,7 @@ public class Level_06_Page_Generator_01 extends BaseTest {
     public void User_02_Login() {
         // Ko có sự kết nối
         registerPage.clickToLogoutLink();
-        registerPage.clickToLoginLink();
+        registerPage.openLoginPage();
         loginPage = new LoginPageObject(driver);
 
         loginPage.logInToSystem(emailAddress, password);
@@ -73,7 +73,7 @@ public class Level_06_Page_Generator_01 extends BaseTest {
 
     @Test
     public void User_03_MyAccount() {
-        homePage.clickToMyAccountLink();
+        homePage.openCustomerInfoPage();
 
         customerInfoPage = new CustomerInfoPageObject(driver);
 

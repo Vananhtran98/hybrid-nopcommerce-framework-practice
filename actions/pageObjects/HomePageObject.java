@@ -1,7 +1,6 @@
 package pageObjects;
 
 import commons.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pageUIs.HomePageUI;
 
@@ -13,7 +12,7 @@ public class HomePageObject extends BasePage {
         this.driver = driver;
     }
 
-    public RegisterPageObject clickToRegisterLink() {
+    public RegisterPageObject openRegisterLink() {
 
         clickToElement(driver, HomePageUI.REGISTER_LINK);
         waitForElementClickable(driver, HomePageUI.REGISTER_LINK);
@@ -26,7 +25,7 @@ public class HomePageObject extends BasePage {
         return isElementDisplayed(driver, HomePageUI.MY_ACCOUNT_LINK);
     }
 
-    public CustomerInfoPageObject clickToMyAccountLink() {
+    public CustomerInfoPageObject openCustomerInfoPage() {
         waitForElementClickable(driver, HomePageUI.MY_ACCOUNT_LINK);
         clickToElement(driver, HomePageUI.MY_ACCOUNT_LINK);
         return PageGenerator.getCustomerPage(driver);

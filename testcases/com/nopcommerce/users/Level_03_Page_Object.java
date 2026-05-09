@@ -50,7 +50,7 @@ public class Level_03_Page_Object extends BaseTest {
     @Test
     public void User_01_Register() {
         // Action 1
-        homePage.clickToRegisterLink();
+        homePage.openRegisterLink();
 
         // Từ Home Page qua Register Page
         // Page đó được sinh ra và bắt đầu làm những action của page đó
@@ -74,7 +74,7 @@ public class Level_03_Page_Object extends BaseTest {
     @Test
     public void User_02_Login() {
         registerPage.clickToLogoutLink();
-        registerPage.clickToLoginLink();
+        registerPage.openLoginPage();
 
         // Từ Register Page qua Login Page
         // Page đó được sinh ra và bắt đầu làm những action của page đó
@@ -94,7 +94,7 @@ public class Level_03_Page_Object extends BaseTest {
 
     @Test
     public void User_03_MyAccount() {
-        homePage.clickToMyAccountLink();
+        homePage.openCustomerInfoPage();
 
         // Từ Home Page qua Customer Info Page
         // Page đó được sinh ra và bắt đầu làm những action của page đó
