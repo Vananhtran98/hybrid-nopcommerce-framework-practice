@@ -3,9 +3,10 @@
 <suite name="NopCommerce Automation Testing">
 
     <test name="Run on Firefox browser">
+        <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Level_02_BasePage_III_Inheritance" />
+            <class name="com.nopcommerce.users.Level_08_Page_Navigation" />
         </classes>
     </test>
 
-</suite> <!-- Suite -->
+</suite>
