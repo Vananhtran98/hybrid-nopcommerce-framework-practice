@@ -7,10 +7,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.CustomerInfoPageObject;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.users.UserCustomerInfoPO;
+import pageObjects.users.UserHomePO;
+import pageObjects.users.UserLoginPageObject;
+import pageObjects.users.UserRegisterPO;
 
 public class Level_04_Multiple_Browser extends BaseTest {
 
@@ -20,7 +20,7 @@ public class Level_04_Multiple_Browser extends BaseTest {
     public void beforeClass(String browserName) {
         driver = getBrowserDriver (browserName);
 
-        homePage = new HomePageObject(driver);
+        homePage = new UserHomePO(driver);
 
         firstName = "John";
         lastName = "Philip";
@@ -35,7 +35,7 @@ public class Level_04_Multiple_Browser extends BaseTest {
         // Action 1
         homePage.openRegisterLink();
 
-        registerPage = new RegisterPageObject(driver);
+        registerPage = new UserRegisterPO(driver);
 
         registerPage.clickToMaleRadio();
 
@@ -56,13 +56,13 @@ public class Level_04_Multiple_Browser extends BaseTest {
         registerPage.clickToLogoutLink();
         registerPage.openLoginPage();
 
-        loginPage = new LoginPageObject(driver);
+        loginPage = new UserLoginPageObject(driver);
 
         loginPage.enterToEmailTextbox(emailAddress);
         loginPage.enterToPasswordTextbox(password);
         loginPage.clickToLoginButton();
 
-        homePage = new HomePageObject(driver);
+        homePage = new UserHomePO(driver);
 
         Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
 
@@ -72,7 +72,7 @@ public class Level_04_Multiple_Browser extends BaseTest {
     public void User_03_MyAccount() {
         homePage.openCustomerInfoPage();
 
-        customerInfoPage = new CustomerInfoPageObject(driver);
+        customerInfoPage = new UserCustomerInfoPO(driver);
 
         Assert.assertTrue(customerInfoPage.isGenderMaleSelected());
         Assert.assertEquals(customerInfoPage.getFirstNameTextboxValue(), firstName);
@@ -83,10 +83,10 @@ public class Level_04_Multiple_Browser extends BaseTest {
     }
 
     private WebDriver driver;
-    private HomePageObject homePage;
-    private RegisterPageObject registerPage;
-    private LoginPageObject loginPage;
-    private CustomerInfoPageObject customerInfoPage;
+    private UserHomePO homePage;
+    private UserRegisterPO registerPage;
+    private UserLoginPageObject loginPage;
+    private UserCustomerInfoPO customerInfoPage;
 
     private String firstName, lastName, emailAddress, companyName, password;
 

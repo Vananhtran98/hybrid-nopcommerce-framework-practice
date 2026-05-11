@@ -8,6 +8,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.*;
+import pageObjects.users.UserAddressPageObject;
+import pageObjects.users.UserCustomerInfoPO;
+import pageObjects.users.UserOrderPO;
+import pageObjects.users.UserRewardPointPO;
+import pageObjects.users.UserHomePO;
+import pageObjects.users.UserLoginPageObject;
+import pageObjects.users.UserRegisterPO;
 
 public class Level_07_Switch_Page_Object extends BaseTest {
 
@@ -17,7 +24,7 @@ public class Level_07_Switch_Page_Object extends BaseTest {
     public void beforeClass(String browserName) {
         driver = getBrowserDriver (browserName);
 
-        homePage = PageGenerator.getHomePage(driver);
+        homePage = PageGenerator.getUserHomePage(driver);
 
         firstName = "John";
         lastName = "Philip";
@@ -31,7 +38,7 @@ public class Level_07_Switch_Page_Object extends BaseTest {
     public void User_01_Register() {
         registerPage = homePage.openRegisterLink();
 
-        customerInfoPage = new CustomerInfoPageObject(driver); // page A -> C
+        customerInfoPage = new UserCustomerInfoPO(driver); // page A -> C
 
         registerPage.clickToMaleRadio();
 
@@ -102,13 +109,13 @@ public class Level_07_Switch_Page_Object extends BaseTest {
 
     String homePageUrl;
     private WebDriver driver;
-    private HomePageObject homePage;
-    private RegisterPageObject registerPage;
-    private LoginPageObject loginPage;
-    private CustomerInfoPageObject customerInfoPage;
-    private AddressPageObject addressPage;
-    private OrderPageObject orderPage;
-    private RewardPointPageObject rewardPointPage;
+    private UserHomePO homePage;
+    private UserRegisterPO registerPage;
+    private UserLoginPageObject loginPage;
+    private UserCustomerInfoPO customerInfoPage;
+    private UserAddressPageObject addressPage;
+    private UserOrderPO orderPage;
+    private UserRewardPointPO rewardPointPage;
     private String firstName, lastName, emailAddress, companyName, password;
 
     @AfterClass

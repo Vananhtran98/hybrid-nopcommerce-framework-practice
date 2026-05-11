@@ -1,6 +1,6 @@
-package pageUIs;
+package pageUIs.users;
 
-public class CustomerInfoPageUI {
+public class UserCustomerInfoPageUI {
 
     public static final String GENDER_MALE_RADIO = "//input[@id='gender-male']";
 
