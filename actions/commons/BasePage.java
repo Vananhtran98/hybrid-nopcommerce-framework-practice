@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.*;
 import pageUIs.*;
 
+import javax.management.RuntimeOperationsException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +54,7 @@ public class BasePage {
     }
 
     public Alert waitAlertPresence(WebDriver driver) {
-        return new WebDriverWait(driver, Duration.ofSeconds(15))
+        return new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
             .until(ExpectedConditions.alertIsPresent());
     }
 
@@ -110,12 +111,40 @@ public class BasePage {
     }
 
     public WebElement getElement(WebDriver driver, String locator) {
-        return driver.findElement(getByXpath(locator));
+        return driver.findElement(getByLocator(locator));
 
     }
 
     public List<WebElement> getListElement(WebDriver driver, String locator) {
-        return driver.findElements(getByXpath(locator));
+        return driver.findElements(getByLocator(locator));
+    }
+
+    // Truyền tham số vào loại gì sẽ trả về kiểu By tương ứng
+    // String prefix: css/ id/ name/ class => By.css/ By.id/ By.name/...
+    // Convention: css/ Css/ CSS - id/ ID/ Id/ iD
+    // css=button#login
+    // Css=button#login
+    // CSS=button#login => By.cssSelector("button#login");
+    public By getByLocator(String prefixLocator) { // css=button#login
+        By by = null;
+        if (prefixLocator.toUpperCase().startsWith("ID")) {
+            by = By.id(prefixLocator.substring(3));
+        } else if (prefixLocator.toUpperCase().startsWith("CLASS")) {
+            by = By.className(prefixLocator.substring(6));
+        } else if (prefixLocator.toUpperCase().startsWith("NAME")) {
+            by = By.name(prefixLocator.substring(5));
+        } else if (prefixLocator.toUpperCase().startsWith("TAGNAME")) {
+            by = By.tagName(prefixLocator.substring(8));
+        } else if (prefixLocator.toUpperCase().startsWith("CSS")) {
+            by = By.cssSelector(prefixLocator.substring(4));
+        } else if (prefixLocator.toUpperCase().startsWith("XPATH")) {
+            by = By.xpath(prefixLocator.substring(6));
+        } else {
+            throw new RuntimeException("Locator type is not support!!!!");
+        }
+
+        System.out.println(by);
+        return by;
     }
 
     public By getByXpath(String locator) {
@@ -317,23 +346,23 @@ public class BasePage {
     }
 
     public void waitForElementVisible(WebDriver driver, String locator) {
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
+    new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locator)));
     }
 
     public void waitForElementSelected(WebDriver driver, String locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeSelected(getByXpath(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeSelected(getByLocator(locator)));
     }
 
     public void waitForElementPresence(WebDriver driver, String locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(getByXpath(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.presenceOfElementLocated(getByLocator(locator)));
     }
 
     public void waitForElementInvisible(WebDriver driver, String locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locator)));
     }
 
     public void waitForElementClickable(WebDriver driver, String locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeClickable(getByLocator(locator)));
     }
 
     public void openAdminSite(WebDriver driver, String adminUrl) {
