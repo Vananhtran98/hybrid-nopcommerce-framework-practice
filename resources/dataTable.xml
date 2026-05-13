@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="NopCommerce Automation Testing">
-    <parameter name="userUrl" value="http://demo.nopcommerce/" />
-    <parameter name="adminUrl" value="http://demo.nopcommerce/admin" />
+<suite name="DataTable">
+    <parameter name="url" value="https://www.jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/#google_vignette" />
 
     <test name="Run on Firefox browser">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Level_09_Switch_Site_Url" />
+            <class name="com.nopcommerce.users.Level_11_DataTable" />
         </classes>
     </test>
 

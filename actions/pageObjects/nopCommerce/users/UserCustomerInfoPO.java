@@ -1,7 +1,7 @@
-package pageObjects.users;
+package pageObjects.nopCommerce.users;
 
 import org.openqa.selenium.WebDriver;
-import pageUIs.users.UserCustomerInfoPageUI;
+import pageUIs.nopCommerce.users.UserCustomerInfoPageUI;
 
 public class UserCustomerInfoPO extends UserSidebarPO {
     private WebDriver driver;

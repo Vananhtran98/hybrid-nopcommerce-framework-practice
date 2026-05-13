@@ -2,22 +2,18 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.admin.AdminDashboardPO;
-import pageObjects.admin.AdminLoginPO;
-import pageObjects.users.UserCustomerInfoPO;
-import pageObjects.users.UserHomePO;
-import pageObjects.users.UserLoginPageObject;
+import pageObjects.nopCommerce.admin.AdminDashboardPO;
+import pageObjects.nopCommerce.admin.AdminLoginPO;
+import pageObjects.nopCommerce.users.UserCustomerInfoPO;
+import pageObjects.nopCommerce.users.UserHomePO;
+import pageObjects.nopCommerce.users.UserLoginPageObject;
 import pageObjects.PageGenerator;
-import pageObjects.users.UserRegisterPO;
-
-import java.time.Duration;
+import pageObjects.nopCommerce.users.UserRegisterPO;
 
 public class Level_09_Switch_Site_Url extends BaseTest {
 

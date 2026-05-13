@@ -7,8 +7,11 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.sql.Driver;
 import java.time.Duration;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class BaseTest {
@@ -55,6 +58,7 @@ public class BaseTest {
 
             driver.get(url);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
+            driver.manage().window().maximize();
             return driver;
         }
 
