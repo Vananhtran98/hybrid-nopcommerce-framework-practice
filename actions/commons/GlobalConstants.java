@@ -1,9 +1,12 @@
 package commons;
 
+import java.io.File;
+
 public class GlobalConstants {
     // System Infor
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String OS_NAME = System.getProperty("os.name");
+    public static final String SEPARATOR = System.getProperty("file.separator");
 
     // App Infor User
     public static final String DEV_USER_URL = "http://demo.nopcommerce/";
@@ -23,22 +26,22 @@ public class GlobalConstants {
     public static final long LONG_TIMEOUT = 30;
 
     // Download/ Upload file
-    public static final String UPLOAD_PATH = PROJECT_PATH + "/uploadFiles/";
-    public static final String DOWNLOAD_PATH = PROJECT_PATH + "/downloadFiles/";
+    public static final String UPLOAD_PATH = PROJECT_PATH + SEPARATOR + "uploadFiles" + SEPARATOR;
+    public static final String DOWNLOAD_PATH = PROJECT_PATH + SEPARATOR + "downloadFiles" + SEPARATOR;
 
     // Retry Case Failed
     public static final int RETRY_NUMBER = 3;
 
     // Browser Logs/ Extension
-    public static final String BROWSER_LOG_PATH = PROJECT_PATH + "/browserLogs/";
-    public static final String BROWSER_EXTENSION_PATH = PROJECT_PATH + "/browserExtensions/";
+    public static final String BROWSER_LOG_PATH = PROJECT_PATH + SEPARATOR + "browserLogs" + SEPARATOR;
+    public static final String BROWSER_EXTENSION_PATH = PROJECT_PATH + SEPARATOR + "browserExtensions" + SEPARATOR;
 
     // HTML Report Folder
-    public static final String REPORTNG_PATH = PROJECT_PATH + "/htmlReportNG/";
-    public static final String EXTENT_PATH = PROJECT_PATH + "/htmlExtent/";
-    public static final String ALLURE_PATH = PROJECT_PATH + "/htmlAllure/";
+    public static final String REPORTNG_PATH = PROJECT_PATH + SEPARATOR + "htmlReportNG" + SEPARATOR;
+    public static final String EXTENT_PATH = PROJECT_PATH + SEPARATOR + "htmlExtent" + SEPARATOR;
+    public static final String ALLURE_PATH = PROJECT_PATH + SEPARATOR + "htmlAllure" + SEPARATOR;
 
     // Data Test/ Environment
-    public static final String DATA_TEST_PATH = PROJECT_PATH + "/dataTest/";
-    public static final String ENVIRONMENT_CONFIG_PATH = PROJECT_PATH + "/environmentConfig/";
+    public static final String DATA_TEST_PATH = PROJECT_PATH + SEPARATOR + "dataTest" + SEPARATOR;
+    public static final String ENVIRONMENT_CONFIG_PATH = PROJECT_PATH + SEPARATOR + "environmentConfig" + SEPARATOR;
 }

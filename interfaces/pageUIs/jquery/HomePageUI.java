@@ -22,6 +22,10 @@ public class HomePageUI {
     public static final String DYNAMIC_PRECEDING_SIBLING_COLUMN_NUMBER_2 = "XPath=//div[text()='%s']/ancestor::th/preceding-sibling::th";
     public static final String ALL_VALUE_BY_COLUMN_INDEX = "XPath=//td[%s]";
 
+    public static final String FILE_LOADED_BY_FILE_NAME = "XPath=//p[@class='name' and text()='%s']";
+    public static final String UPLOAD_BUTTON = "Css=td>button.start";
+    public static final String FILE_UPLOADED_SUCCESS_BY_FILE_NAME = "XPath=//p[@class='name']/a[@title='%s']";
+
 
 
 

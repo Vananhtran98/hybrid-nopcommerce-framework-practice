@@ -6,6 +6,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageUIs.nopCommerce.BasePageUI;
 
 import javax.management.RuntimeOperationsException;
 import java.time.Duration;
@@ -423,6 +424,25 @@ public class BasePage {
 
     public void waitForElementClickable(WebDriver driver, String locator, String... restParameter) {
         new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeClickable(getByLocator(castParameter(locator, restParameter))));
+    }
+
+    public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
+        // Lấy ra đường dẫn của thư mục uplaod file
+        String filePath = GlobalConstants.UPLOAD_PATH;
+
+        // driver.findElement(inputBy).sendKeys(hoiAnPath + "\n" + haGiangPath + "\n" + phuQuocPath);
+        String fullFileName = "";
+
+        // Dùng vòng lặp truyền qua các file name
+        for (String file : fileNames) {
+            fullFileName += filePath + file + "\n";
+        }
+
+        // Cắt kí tự xuống dòng (\n) ở 2 đầu chuỗi đi
+        fullFileName = fullFileName.trim();
+
+        // Sendkey
+        getElement(driver, BasePageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
     }
 
     public void openAdminSite(WebDriver driver, String adminUrl) {
