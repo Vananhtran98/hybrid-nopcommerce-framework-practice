@@ -1,6 +1,8 @@
 package pageUIs.nopCommerce.users;
 
 public class UserRegisterPageUI {
+    public static final String REGISTER_PAGE_TITLE = "Css=div.page-title>h1";
+
     public static final String GENDER_MALE_RADIO = "xpath=//input[@id='gender-male']";
 
     public static final String FIRST_NAME_TEXTBOX = "XPath=//input[@id='FirstName']";

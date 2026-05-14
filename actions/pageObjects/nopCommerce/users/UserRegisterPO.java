@@ -68,4 +68,10 @@ public class UserRegisterPO extends BasePage {
         clickToElement(driver, UserRegisterPageUI.REGISTER_LOGIN_LINK);
         return PageGenerator.getUserLoginPage(driver);
     }
+
+    public String getRegisterPageTitle() {
+        waitForElementVisible(driver, UserRegisterPageUI.REGISTER_PAGE_TITLE);
+        return getElementText(driver, UserRegisterPageUI.REGISTER_PAGE_TITLE);
+
+    }
 }
