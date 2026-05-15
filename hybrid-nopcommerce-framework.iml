@@ -12,5 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="selenium-testng" level="project" />
+    <orderEntry type="library" name="libLog4J1" level="project" />
+    <orderEntry type="library" name="log4j1" level="project" />
   </component>
 </module>

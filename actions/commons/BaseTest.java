@@ -1,5 +1,7 @@
 package commons;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -13,6 +15,11 @@ import java.util.Random;
 public class BaseTest {
 
     protected WebDriver driver;
+    protected final Log log;
+
+    public BaseTest() {
+        log = LogFactory.getLog(getClass());
+    }
 
 
     protected WebDriver getBrowserDriver(String browserName) {
@@ -66,8 +73,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertTrue(condition);
+            log.info("------PASSED------");
         } catch (Throwable e) {
             status = false;
+            log.info("------FAILED------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }
@@ -79,8 +88,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertFalse(condition);
+            log.info("------PASSED------");
         } catch (Throwable e) {
             status = false;
+            log.info("------FAILED------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }
@@ -91,8 +102,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertEquals(actual, expected);
+            log.info("------PASSED------");
         } catch (Throwable e) {
             status = false;
+            log.info("------FAILED------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }
