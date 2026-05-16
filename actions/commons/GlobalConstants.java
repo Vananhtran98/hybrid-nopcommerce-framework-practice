@@ -1,11 +1,10 @@
 package commons;
 
-import java.io.File;
-
 public class GlobalConstants {
     // System Infor
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String OS_NAME = System.getProperty("os.name");
+    public static final String JAVA_VERSION = System.getProperty("java.version");
     public static final String SEPARATOR = System.getProperty("file.separator");
 
     // App Infor User

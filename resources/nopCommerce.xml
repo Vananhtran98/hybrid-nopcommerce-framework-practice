@@ -4,18 +4,30 @@
 
     <listeners>
         <listener class-name="commons.MethodListener"></listener>
-        <listener class-name="reportConfigs.ReportNGListener"></listener>
-        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
+        <listener class-name="reportConfigs.ExtentListener"></listener>
     </listeners>
-    
+
     <parameter name="userUrl" value="http://demo.nopcommerce/" />
     <parameter name="adminUrl" value="http://demo.nopcommerce/admin" />
 
     <test name="Run on Firefox browser">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Level_14_Log4J" />
+            <class name="com.nopcommerce.users.Level_15_ExtentReport" />
+        </classes>
+    </test>
+
+    <test name="Run on Chrome browser">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="com.nopcommerce.users.Level_15_ExtentReport" />
+        </classes>
+    </test>
+
+    <test name="Run on Edge browser">
+        <parameter name="browser" value="edge"></parameter>
+        <classes>
+            <class name="com.nopcommerce.users.Level_15_ExtentReport" />
         </classes>
     </test>
 

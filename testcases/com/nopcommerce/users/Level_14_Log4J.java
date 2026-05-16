@@ -17,7 +17,6 @@ public class Level_14_Log4J extends BaseTest {
     @BeforeClass
     public void beforeClass(String browserName) {
         driver = getBrowserDriver (browserName);
-
         homePage = PageGenerator.getUserHomePage(driver);
 
         firstName = "John";
@@ -58,15 +57,14 @@ public class Level_14_Log4J extends BaseTest {
         registerPage.clickToRegisterButton();
 
         log.info("User_01_Register - STEP 10: Verify success message is displayed");
-        Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-
-        log.info("User_01_Register - STEP 11: Click to Logout link");
-        homePage = registerPage.clickToLogoutLink();
+        Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed...");
 
     }
 
     @Test
     public void User_02_Login() {
+        homePage = registerPage.clickToLogoutLink();
+
         loginPage = homePage.openLoginPage();
 
         homePage = loginPage.logInToSystem(emailAddress, password);

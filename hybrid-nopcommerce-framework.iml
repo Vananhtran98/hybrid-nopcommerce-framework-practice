@@ -15,5 +15,6 @@
     <orderEntry type="library" name="libLog4J1" level="project" />
     <orderEntry type="library" name="log4j2" level="project" />
     <orderEntry type="library" name="reportng" level="project" />
+    <orderEntry type="library" name="extent5" level="project" />
   </component>
 </module>
