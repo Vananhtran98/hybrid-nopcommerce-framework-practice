@@ -1,26 +1,32 @@
 package commons;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Random;
 
 public class BaseTest {
-
     protected WebDriver driver;
-    protected final Log log;
 
-    public BaseTest() {
-        log = LogFactory.getLog(getClass());
+    public WebDriver getDriver() {
+        return driver;
     }
 
+    protected final Logger log;
+
+    public BaseTest() {
+        log = LogManager.getLogger(getClass());
+    }
 
     protected WebDriver getBrowserDriver(String browserName) {
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
@@ -110,5 +116,28 @@ public class BaseTest {
             Reporter.getCurrentTestResult().setThrowable(e);
         }
         return status;
+    }
+
+    @BeforeSuite
+    public void deleteReportFolder() {
+        deleteAllFileInFolder("htmlReportNG");
+    }
+
+    private void deleteAllFileInFolder(String folderName) {
+        try {
+            String pathFolderDownload = GlobalConstants.PROJECT_PATH + File.separator + folderName;
+            File file = new File(pathFolderDownload);
+            File[] listOfFiles = file.listFiles();
+
+            if (listOfFiles.length != 0) {
+                for (int i = 0; i < listOfFiles.length; i++) {
+                    if (listOfFiles[i].isFile() && !listOfFiles[i].getName().equals("environment.properties")) {
+                        new File(listOfFiles[i].toString()).delete();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
     }
 }
