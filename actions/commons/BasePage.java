@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageUIs.nopCommerce.BasePageUI;
 
-import javax.management.RuntimeOperationsException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -273,12 +272,35 @@ public class BasePage {
         }
     }
 
+    // Implicit Wait:
+    // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
+    public void overrideGlobalTimeout(WebDriver driver, long timeInSecond) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeInSecond));
+
+    }
+
     public boolean isElementDisplayed(WebDriver driver, String locator) {
-        return getElement(driver, locator).isDisplayed();
+        return getElement(driver, castParameter(locator)).isDisplayed();
     }
 
     public boolean isElementDisplayed(WebDriver driver, String locator, String... restParameter) {
         return getElement(driver, castParameter(locator, restParameter)).isDisplayed();
+    }
+
+    public boolean isElementUnDisplayed(WebDriver driver, String locator) {
+        overrideGlobalTimeout(driver, GlobalConstants.SHORT_TIMEOUT);
+        List<WebElement> elements = getListElement(driver, locator);
+        overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
+        if (elements.size() == 0) {
+            System.out.println("Case 3 - Verify Confirm Email textbox is not displayed (non-present)");
+            return true;
+        } else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+            System.out.println("Case 2 - Verify Confirm Email textbox is not displayed (present)");
+            return true;
+        } else {
+            System.out.println("Case 1 - Verify Confirm Email textbox is displayed (visible)");
+            return false;
+        }
     }
 
     public boolean isElementEnabled(WebDriver driver, String locator) {
