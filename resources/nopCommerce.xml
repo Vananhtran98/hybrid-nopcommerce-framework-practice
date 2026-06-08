@@ -12,7 +12,7 @@
     <test name="Run on Firefox browser">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Level_17_JIRA" />
+            <class name="com.nopcommerce.users.Level_19_Pattern_Object" />
         </classes>
     </test>
 

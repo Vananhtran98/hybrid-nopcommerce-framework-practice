@@ -27,10 +27,10 @@ public class UserLoginPageObject extends BasePage {
     }
 
     @Step("Click to Login button")
-    public void clickToLoginButton() {
+    public UserHomePO clickToLoginButton() {
         waitForElementClickable(driver, UserLoginPageUI.LOGIN_BUTTON);
         clickToElement(driver, UserLoginPageUI.LOGIN_BUTTON);
-
+        return PageGenerator.getUserHomePage(driver);
     }
 
     @Step("Login to application with valid Email and Password")
