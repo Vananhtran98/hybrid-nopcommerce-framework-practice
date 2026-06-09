@@ -9,10 +9,11 @@
     <parameter name="userUrl" value="http://demo.nopcommerce/" />
     <parameter name="adminUrl" value="http://demo.nopcommerce/admin" />
 
-    <test name="Run on Firefox browser">
+    <test name="Run on Firefox browser" preserve-order="true">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.nopcommerce.users.Level_19_Pattern_Object" />
+            <class name="com.nopcommerce.common.Login" />
+            <class name="com.nopcommerce.users.Level_20_Share_State" />
         </classes>
     </test>
 

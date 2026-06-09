@@ -156,7 +156,21 @@ public class BasePage {
 
     public By getByXpath(String locator) {
         return By.xpath(locator);
+    }
 
+    public Set<Cookie> getAllCookies(WebDriver driver) {
+        return driver.manage().getCookies();
+    }
+
+    public void setCookies(WebDriver driver, Set<Cookie> cookies) {
+        for (Cookie cookie : cookies) {
+            try {
+                driver.manage().addCookie(cookie);
+            } catch (Exception e) {
+                System.out.println("Skip cookie: " + cookie.getName());
+            }
+        }
+        sleepInSecond(3);
     }
 
     public void clickToElement(WebDriver driver, String locator) {
