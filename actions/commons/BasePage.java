@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageUIs.nopCommerce.BasePageUI;
+import pageUIs.orangehrm.BasePUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -182,12 +183,20 @@ public class BasePage {
     }
 
     public void sendKeyToElement(WebDriver driver, String locator, String keysToSend) {
-        getElement(driver, locator).clear();
+        Keys key = null;
+        if (GlobalConstants.OS_NAME.startsWith("Windows")) {
+            key = Keys.CONTROL;
+        } else {
+            key = Keys.COMMAND;
+        }
+        getElement(driver, locator).sendKeys(Keys.chord(key,"a",Keys.BACK_SPACE));
+        sleepInSecond(1);
         getElement(driver, locator).sendKeys(keysToSend);
     }
 
     public void sendKeyToElement(WebDriver driver, String locator, String valueToSendkey, String... restParameter) {
         getElement(driver, castParameter(locator, restParameter)).clear();
+        sleepInSecond(1);
         getElement(driver, castParameter(locator, restParameter)).sendKeys(valueToSendkey);
     }
 
@@ -212,10 +221,10 @@ public class BasePage {
         getElement(driver, parentLocator).click();
         sleepInSecond(2);
 
-        List<WebElement> allItems = new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(childItemLocator)));
-
+        List<WebElement> allItems = new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childItemLocator)));
         sleepInSecond(2);
+
         for (WebElement item : allItems) {
             if (item.getText().trim().equals(expectedItem)) {
                 item.click();
@@ -238,6 +247,10 @@ public class BasePage {
 
     public String getElementAttribute(WebDriver driver, String locator, String attributeName, String... restParameter) {
         return getElement(driver, castParameter(locator, restParameter)).getAttribute(attributeName);
+    }
+
+    public Dimension getElementSize(WebDriver driver, String locator) {
+        return getElement(driver, locator).getSize();
     }
 
     public String getElementText(WebDriver driver, String locator) {
@@ -392,6 +405,11 @@ public class BasePage {
         sleepInSecond(3);
     }
 
+    public void clickToElementByJS(WebDriver driver, String locator, String... restParameter) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", getElement(driver, castParameter(locator, restParameter)));
+        sleepInSecond(2);
+    }
+
     public void scrollToElementOnTopByJS(WebDriver driver, String locator) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getElement(driver, locator));
     }
@@ -470,6 +488,11 @@ public class BasePage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locator)));
     }
 
+    public boolean waitForListElementInvisible(WebDriver driver, String locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.invisibilityOfAllElements(getListElement(driver, locator)));
+    }
+
     public void waitForElementClickable(WebDriver driver, String locator) {
         new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeClickable(getByLocator(locator)));
     }
@@ -540,5 +563,15 @@ public class BasePage {
     public boolean isCheckboxByIDSelected(WebDriver driver, String checkboxID) {
         waitForElementSelected(driver, BasePageUI.CHECKBOX_BY_ID, checkboxID);
         return isElementSelected(driver, BasePageUI.CHECKBOX_BY_ID, checkboxID);
+    }
+
+    /* Only use for OrangeHRM project */
+    public boolean waitAllLoadingIconInvisible(WebDriver driver) {
+        return waitForListElementInvisible(driver, BasePUI.LOADING_ICON);
+    }
+
+    public boolean isSuccessMessageIsDisplayed(WebDriver driver) {
+        waitForElementVisible(driver, BasePUI.SUCCESS_MESSAGE);
+        return isElementDisplayed(driver, BasePUI.SUCCESS_MESSAGE);
     }
 }
