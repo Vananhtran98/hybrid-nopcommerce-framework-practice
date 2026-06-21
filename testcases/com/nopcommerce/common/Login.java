@@ -61,7 +61,7 @@ public class Login extends BaseTest {
         // Get Cookies
         nopCommerceCookies = homePage.getAllCookies(driver);
 
-        driver.quit();
+        closeBrowserDriver();
     }
 
 

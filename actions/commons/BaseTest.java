@@ -2,11 +2,17 @@ package commons;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeSuite;
@@ -54,13 +60,45 @@ public class BaseTest {
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
         switch (browserList) {
             case FIREFOX:
-                driver = new FirefoxDriver();
+                FirefoxOptions options = new FirefoxOptions();
+                // options.addArguments("window-size=1024x768");
+                options.addArguments("-private");
+
+                FirefoxProfile ffProfile = new FirefoxProfile();
+                ffProfile.setPreference("browser.private.browsing.autostart", true);
+                ffProfile.setPreference("browser.private.browsing.autostart", true);
+                ffProfile.setAcceptUntrustedCertificates(true);
+                ffProfile.setAcceptUntrustedCertificates(false);
+                options.setProfile(ffProfile);
+
+                driver = new FirefoxDriver(options);
+
+                Dimension dimension = new Dimension(1024, 768);
+                driver.manage().window().setSize(dimension);
                 break;
             case CHROME:
-                driver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--user-data-dir=C:\\Users\\DELL\\AppData\\Local\\Google\\Chrome\\User Data");
+                chromeOptions.addArguments("--profile-directory=Profile 8");
+                driver = new ChromeDriver(chromeOptions);
+                break;
+            case COCCOC:
+                ChromeOptions ccOptions = new ChromeOptions();
+
+                ccOptions.setBinary("C:\\Program Files\\CocCoc\\Browser\\Application\\browser.exe");
+                driver = new ChromeDriver(ccOptions);
                 break;
             case EDGE:
-                driver = new EdgeDriver();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--inprivate");
+                driver = new EdgeDriver(edgeOptions);
+                break;
+            case IE:
+                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+                ieOptions.destructivelyEnsureCleanSession();
+                ieOptions.ignoreZoomSettings();
+                ieOptions.introduceFlakinessByIgnoringSecurityDomains();
+                driver = new InternetExplorerDriver(ieOptions);
                 break;
             default:
                 throw new RuntimeException("Browser name is not valid.");

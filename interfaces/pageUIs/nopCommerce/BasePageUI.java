@@ -14,7 +14,9 @@ public class BasePageUI {
     public static final String TEXTBOX_BY_ID = "XPath=//input[@id='%s']";
     public static final String CHECKBOX_BY_ID = "XPath=//input[@id='%s']";
     public static final String RADIO_BY_ID = "XPath=//input[@id='%s']";
-    public static final String BUTTON_BY_TEXT = "XPath=//button[text()='%s']";
+    public static final String CHROME_BUTTON_BY_TEXT = "XPath=//button[text()='%s']";
+    public static final String EDGE_BUTTON_BY_TEXT = "XPath=//button[text()='%s']";
+    public static final String FIREFOX_BUTTON_BY_TEXT = "XPath=//button[text()='%s']";
 
 }
 

@@ -175,11 +175,21 @@ public class BasePage {
     }
 
     public void clickToElement(WebDriver driver, String locator) {
-        getElement(driver, locator).click();
+        if (driver.toString().contains("InternetExplorer")) {
+            clickToElementByJS(driver, locator);
+            sleepInSecond(2);
+        } else {
+            getElement(driver, locator).click();
+        }
     }
 
     public void clickToElement(WebDriver driver, String locator, String... restParameter) {
-        getElement(driver, castParameter(locator, restParameter)).click();
+        if (driver.toString().contains("InternetExplorer")) {
+            clickToElementByJS(driver, locator, restParameter);
+            sleepInSecond(2);
+        } else {
+            getElement(driver, castParameter(locator, restParameter)).click();
+        }
     }
 
     public void sendKeyToElement(WebDriver driver, String locator, String keysToSend) {
@@ -535,8 +545,17 @@ public class BasePage {
     }
 
     public void clickToButtonByText(WebDriver driver, String buttonText) {
-        waitForElementClickable(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
-        clickToElement(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
+        String locator = null;
+        String browser = driver.toString();
+        if (browser.contains("ChromeDriver")) {
+            locator = BasePageUI.CHROME_BUTTON_BY_TEXT;
+        } else if (browser.contains("FirefoxDriver")){
+            locator = BasePageUI.FIREFOX_BUTTON_BY_TEXT;
+        } else {
+            locator = BasePageUI.EDGE_BUTTON_BY_TEXT;
+        }
+        waitForElementClickable(driver, locator, buttonText);
+        clickToElement(driver, locator, buttonText);
     }
 
     public void clickToRadioByID(WebDriver driver, String radioID) {
