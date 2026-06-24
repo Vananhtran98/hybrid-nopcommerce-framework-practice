@@ -2,15 +2,12 @@ package commons;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.testng.Assert;
@@ -60,21 +57,21 @@ public class BaseTest {
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
         switch (browserList) {
             case FIREFOX:
-                FirefoxOptions options = new FirefoxOptions();
-                // options.addArguments("window-size=1024x768");
-                options.addArguments("-private");
+//                FirefoxOptions options = new FirefoxOptions();
+//                // options.addArguments("window-size=1024x768");
+//                options.addArguments("-private");
+//
+//                FirefoxProfile ffProfile = new FirefoxProfile();
+//                ffProfile.setPreference("browser.private.browsing.autostart", true);
+//                ffProfile.setPreference("browser.private.browsing.autostart", true);
+//                ffProfile.setAcceptUntrustedCertificates(true);
+//                ffProfile.setAcceptUntrustedCertificates(false);
+//                options.setProfile(ffProfile);
 
-                FirefoxProfile ffProfile = new FirefoxProfile();
-                ffProfile.setPreference("browser.private.browsing.autostart", true);
-                ffProfile.setPreference("browser.private.browsing.autostart", true);
-                ffProfile.setAcceptUntrustedCertificates(true);
-                ffProfile.setAcceptUntrustedCertificates(false);
-                options.setProfile(ffProfile);
+                driver = new FirefoxDriver();
 
-                driver = new FirefoxDriver(options);
-
-                Dimension dimension = new Dimension(1024, 768);
-                driver.manage().window().setSize(dimension);
+//                Dimension dimension = new Dimension(1024, 768);
+//                driver.manage().window().setSize(dimension);
                 break;
             case CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();

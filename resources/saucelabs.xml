@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NopCommerce Automation Testing">
+
+    <listeners>
+        <listener class-name="commons.MethodListener"></listener>
+    </listeners>
+
+    <parameter name="userUrl" value="https://www.saucedemo.com/" />
+
+    <test name="Run on Firefox">
+        <parameter name="browser" value="firefox"></parameter>
+        <classes>
+            <class name="com.saucelabs.Level_22_Sort" />
+        </classes>
+    </test>
+
+</suite>
